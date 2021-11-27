@@ -1,0 +1,23 @@
+# Memanggil library yang dibutuhkan 
+library(Matrix)
+library(arules)
+library(grid)
+library(arulesViz)
+
+# Memasukan data
+data <- list(c("Roti", "Mentega"), c("Roti", "Susu"), c("Susu"))
+data
+data_transaction <- as(data, "transactions")
+data_transaction
+
+# Melihat gambaran data 
+dim(data_transaction)
+class(data_transaction)
+crossTable(data_transaction)
+
+# Melakukan aturan asosiasi
+data_ap <- apriori(data_transaction, parameter = list(supp = 0.2, conf = 0.2))
+inspect(sort(data_ap))
+
+# Memvisualisasikannya
+plot(data_ap, method = "grap")
